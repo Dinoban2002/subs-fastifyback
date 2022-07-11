@@ -5,9 +5,11 @@
   },
   "dependencies": {
     "@fastify/cors": "^7.0.0",
-    "body-parser": "^1.20.0",
+    "@fastify/helmet": "^9.1.0",
     "fastify": "^3.20.1",
-    "fastify-cors": "^6.1.0",
+    "fastify-cors": "^6.0.2",
+    "fastify-formbody": "^5.1.0",
+    "fastify-multipart": "^4.0.7",
     "generate-api-key": "^1.0.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
