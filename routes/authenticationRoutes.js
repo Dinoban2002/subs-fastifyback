@@ -1,27 +1,21 @@
+var resMessage = require("../validation")
 const routes = async (app, options) =>{
-    app.post('/admin-user', async (req, res) => {
-        console.log('entr admin user req')
+    app.post('/admin-user', async (req, res) =>{
         let data = req.body
-        let username = data.username;
-        let password = data.password;
-        let userName="admin"
-        let passWord="admin"
+        let username = data.username
+        let password = data.password
+        let validUsername = "admin"
+        let validPassword = "admin"
         try {
-        if(username==userName&&password==passWord){
-            res.send({loginstatus:"1"})
-        }
-        if(username!=userName&&password==passWord){
-            res.send({loginstatus:"2"})
-        }
-        if(username==userName&&password!=passWord){
-            res.send({loginstatus:"3"})
-        }
-        if(username!=userName&&password!=passWord){
-            res.send({loginstatus:"0"})
-        }
-        
+            if(username != validUsername){
+                res.status(501).send({status: false, message: resMessage.invalidUser})
+            }else if(username == validUsername && password != validPassword){
+                res.status(501).send({status: false, message: resMessage.invalidPass})
+            }else if(username == validUsername && password == validPassword){
+                res.status(200).send({status: true, message: resMessage.success})
+            }
         } catch (err) {
-        res.send(err);  
+        res.status(501).send({status:false,message:err.message}) 
         } 
     })
 }

@@ -3,5 +3,9 @@ const sequelize = new Sequelize('project', 'rootuser', 'root', {
     host: 'localhost',
     dialect: 'mysql'
 });
-sequelize.authenticate();
-module.exports=sequelize
+sequelize.authenticate().then(() => {
+    console.log('Connection has been established successfully.');
+}).catch(err => {
+    console.error('Unable to connect to the database:', err.message);
+});
+module.exports = sequelize
