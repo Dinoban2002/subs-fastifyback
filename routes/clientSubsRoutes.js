@@ -10,7 +10,7 @@ const routes = async (app, options) =>{
             if(result.length > 0){
                 res.status(200).send({status: true,message: resMessage.retrieve, result})
             }else{
-                res.status(501).send({status: false , message: resMessage.no_data}) 
+                res.status(200).send({status: false , message: resMessage.no_data}) 
             }
         }catch (err) {
             res.status(501).send({status: false , message: err.message}) 
@@ -25,13 +25,13 @@ const routes = async (app, options) =>{
                 if(result){
                     res.status(200).send({status: true, message: resMessage.inserted})
                 }else{
-                    res.status(501).send({status: false , message: resMessage.queryFail})
+                    res.status(200).send({status: false , message: resMessage.queryFail})
                 }
             }catch (err) {   
             res.status(501).send({status: false , message: err.message})
             } 
         }else{
-            res.status(501).send({status: false , message: resMessage.invalidData})
+            res.status(200).send({status: false , message: resMessage.invalidData})
         }
     });
     app.get('/all-license', async (req, res) => {
@@ -40,7 +40,7 @@ const routes = async (app, options) =>{
             if(result.length > 0){
                 res.status(200).send({status: true,message: resMessage.retrieve, result})
             }else{
-                res.status(501).send({status: false , message: resMessage.no_data}) 
+                res.status(200).send({status: false , message: resMessage.no_data}) 
             }
         } catch (err) {
             res.status(501).send({status: false , message: err.message})
@@ -54,13 +54,13 @@ const routes = async (app, options) =>{
                 if(result){
                     res.status(200).send({status: true, message: resMessage.inserted})
                 }else{
-                    res.status(501).send({status: false , message: resMessage.queryFail})
+                    res.status(200).send({status: false , message: resMessage.queryFail})
                 }
             } catch (err) {     
             res.status(501).send({status: false, message: err.message})
             } 
         }else{
-            res.status(501).send({status: false , message: resMessage.invalidData})
+            res.status(200).send({status: false , message: resMessage.invalidData})
         }
     });
     app.post('/update-subs', async (req, res) => {
@@ -72,13 +72,13 @@ const routes = async (app, options) =>{
                     res.status(200).send({status:true, message: resMessage.updated})
                 }
                 else{
-                    res.status(501).send({status: false, message: resMessage.not_updated})
+                    res.status(200).send({status: false, message: resMessage.not_updated})
                 }
             }catch (err) {     
                 res.status(501).send({status: false , message: err.message})
             } 
         }else{
-            res.status(501).send({status: false , message: resMessage.invalidData})
+            res.status(200).send({status: false , message: resMessage.invalidData})
         }
     });
     app.post('/view-subs', async (req, res) => {
@@ -99,7 +99,7 @@ const routes = async (app, options) =>{
             if(result.length > 0){
                 res.status(200).send({status: true,message: resMessage.retrieve, result})
             }else{
-                res.status(501).send({status: false , message: resMessage.no_data,result}) 
+                res.status(200).send({status: false , message: resMessage.no_data,result}) 
             }
         } catch (err) {
             res.status(501).send({status: false , message: err.message}) 
