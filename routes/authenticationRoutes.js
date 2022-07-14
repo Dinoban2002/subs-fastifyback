@@ -17,21 +17,21 @@ const routes = async (app, options) =>{
                 }else{
                     res.status(200).send({status: false, message: resMessage.invalidPass})
                 }
-            }
+                }
         }
         catch(e){
             res.status(501).send({status: false , message: e.message})
         }
     })
-
-    app.post('/signup', async function (request, reply) {
+    app.post('/signup', async function (request, res) {
         let user = request.body
         let username = user.username 
         let password = user.password
         try{
             let result =  await User.findAll({where:{username: username }})
             if(result.length == 0){
-                let hash = await bcrypt.hash(password, 10);
+                let salt = await bcrypt.genSalt(10);
+                let hash = await bcrypt.hash(password, salt);
                 let result = await User.create({username:username,password:hash})
                 if(result){
                     res.status(200).send({status: true, message: resMessage.createAccount})
@@ -40,11 +40,11 @@ const routes = async (app, options) =>{
                 }
             }
             else{
-                reply.status(501).send({status: false, message: resMessage.alreadyExist})
+                res.status(200).send({status: false, message: resMessage.alreadyExist})
             }
         }
         catch(e){
-            reply.status(501).send({status: false , message: e.message})
+            res.status(501).send({status: false , message: e.message})
         }
     })
 }

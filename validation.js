@@ -9,6 +9,8 @@ var resMessage = {
     invalidPass: "possword is incorrect",
     queryFail: "query not executed",
     invalidData: "request data was invalid",
+    createAccount:"New user created successfully",
+    alreadyExist: "Username already exist",
     null_clientId: "client id has not proper value",
     null_licenseId: "licenseId has not proper value",
     null_startDate: "startDate has not proper value",

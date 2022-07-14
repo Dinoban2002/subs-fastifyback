@@ -13,7 +13,11 @@ const routes = async (app, options) =>{
                 res.status(200).send({status: false , message: resMessage.no_data}) 
             }
         }catch (err) {
-            res.status(501).send({status: false , message: err.message}) 
+            if(err.name == 'SequelizeConnectionError' || err.name == 'SequelizeAccessDeniedError'){
+                res.status(500).send({status: false , message: err.name}) 
+            }else{
+                res.status(501).send({status: false , message: err.message}) 
+            }
         }
     });
     app.post('/insert-user', async (req, res) => {
@@ -28,7 +32,11 @@ const routes = async (app, options) =>{
                     res.status(200).send({status: false , message: resMessage.queryFail})
                 }
             }catch (err) {   
-            res.status(501).send({status: false , message: err.message})
+                if(err.name == 'SequelizeConnectionError' || err.name == 'SequelizeAccessDeniedError'){
+                    res.status(500).send({status: false , message: err.name}) 
+                }else{
+                    res.status(501).send({status: false , message: err.message}) 
+                }
             } 
         }else{
             res.status(200).send({status: false , message: resMessage.invalidData})
@@ -43,7 +51,11 @@ const routes = async (app, options) =>{
                 res.status(200).send({status: false , message: resMessage.no_data}) 
             }
         } catch (err) {
-            res.status(501).send({status: false , message: err.message})
+            if(err.name == 'SequelizeConnectionError' || err.name == 'SequelizeAccessDeniedError'){
+                res.status(500).send({status: false , message: err.name}) 
+            }else{
+                res.status(501).send({status: false , message: err.message}) 
+            }
         }
     });
     app.post('/make-subs', async (req, res) => {
@@ -57,7 +69,11 @@ const routes = async (app, options) =>{
                     res.status(200).send({status: false , message: resMessage.queryFail})
                 }
             } catch (err) {     
-            res.status(501).send({status: false, message: err.message})
+                if(err.name == 'SequelizeConnectionError' || err.name == 'SequelizeAccessDeniedError'){
+                    res.status(500).send({status: false , message: err.name}) 
+                }else{
+                    res.status(501).send({status: false , message: err.message}) 
+                }
             } 
         }else{
             res.status(200).send({status: false , message: resMessage.invalidData})
@@ -75,7 +91,11 @@ const routes = async (app, options) =>{
                     res.status(200).send({status: false, message: resMessage.not_updated})
                 }
             }catch (err) {     
-                res.status(501).send({status: false , message: err.message})
+                if(err.name == 'SequelizeConnectionError' || err.name == 'SequelizeAccessDeniedError'){
+                    res.status(500).send({status: false , message: err.name}) 
+                }else{
+                    res.status(501).send({status: false , message: err.message}) 
+                }
             } 
         }else{
             res.status(200).send({status: false , message: resMessage.invalidData})
@@ -99,7 +119,11 @@ const routes = async (app, options) =>{
             if(result.length > 0){
                 res.status(200).send({status: true,message: resMessage.retrieve, result})
             }else{
-                res.status(200).send({status: false , message: resMessage.no_data,result}) 
+                if(err.name == 'SequelizeConnectionError' || err.name == 'SequelizeAccessDeniedError'){
+                    res.status(500).send({status: false , message: err.name}) 
+                }else{
+                    res.status(501).send({status: false , message: err.message}) 
+                }
             }
         } catch (err) {
             res.status(501).send({status: false , message: err.message}) 
